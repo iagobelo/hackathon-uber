@@ -138,10 +138,15 @@ class Map extends Component {
             description="Some description"
           />
 
-          <Polyline
-            coordinates={data}
-          />
+          <MapView.Polyline
+            coordinates={[{
+              latitude: -34.91687,
+              longitude: -8.09554
+            }, this.state.location]}
+            strokeWidth={2}
+            strokeColor="red" />
         </MapView>
+
 
         <View style={styles.inputContainer}>
           <TextInput
