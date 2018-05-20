@@ -1,8 +1,7 @@
-import { StackNavigator, DrawerNavigator } from 'react-navigation';
+import { StackNavigator } from 'react-navigation';
 
 import {
   Splash,
-  SignUp,
   Main,
   Map,
 } from '../screens';
@@ -18,12 +17,9 @@ const drawerSettings = {
 };
 
 const routes = StackNavigator({
-  Splash: { screen: Splash },
-  SignUp: { screen: SignUp },
+  // Splash: { screen: Splash },
   UserMain: {
-    screen: DrawerNavigator({
-      UserMain: { screen: Map },
-    }, drawerSettings),
+    screen: Map,
   },
 }, rootSettings);
 

@@ -1,111 +1,87 @@
 import React from 'react';
-import { View, StyleSheet } from 'react-native';
-import {
-  Toolbar,
-  ToolbarAction,
-  ToolbarContent,
-} from 'react-native-paper';
-import { connect } from 'react-redux';
+import { View, StyleSheet, Text, ScrollView } from 'react-native';
+import { TextInput } from 'react-native-paper';
+import { Icon } from 'react-native-elements';
 
 import PropTypes from 'prop-types';
-import * as AuthorizationActions from '../actions/AuthorizationActions';
-import { DEFAULT_MARGIN } from '../config/dimen';
+import { SuggestionCard } from '../components';
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#fff',
+    flexDirection: 'column',
+    paddingTop: 30,
+    padding: 20,
   },
-  toolbar: {
-    backgroundColor: '#fff',
+  title: {
+    fontWeight: '500',
+    fontSize: 20,
+    marginTop: 50,
   },
-  list: {
-    paddingHorizontal: DEFAULT_MARGIN,
-    paddingTop: DEFAULT_MARGIN,
+  description: {
+    fontWeight: '500',
+    fontSize: 20,
+    marginTop: 50,
+    marginBottom: 20,
   },
-  modalContainer: {
-    flex: 1,
+  icon: {
+    alignSelf: 'flex-end',
+  },
+  input: {
+    // backgroundColor: '#fff',
   },
   row: {
     flexDirection: 'row',
-    justifyContent: 'flex-end',
-  },
-  image: {
-    flex: 1,
-  },
-  closeIcon: {
-    color: '#fff',
-    backgroundColor: 'transparent',
-    fontWeight: '500',
-    fontSize: 18,
   },
 });
 
 class Main extends React.Component {
   static propTypes = {
     navigation: PropTypes.objectOf(PropTypes.any).isRequired,
-    getAuthorizations: PropTypes.func.isRequired,
   }
 
-  constructor(props) {
-    super(props);
-
-    this.handleMenuPress = this.handleMenuPress.bind(this);
-    this.onItemPress = this.onItemPress.bind(this);
-  }
-
-  state = {
-    activeItem: undefined,
-  }
-
-  componentDidMount() {
-    this.props.getAuthorizations();
-  }
-
-  onItemPress = ({ _id: id }) => {
-    if (id === this.state.activeItem) this.setState({ activeItem: undefined });
-    else this.setState({ activeItem: id });
-  }
-
-  handleMenuPress = () => this.props.navigation.navigate('DrawerOpen')
-
-  handleNotificationPress = () => { }
+  state = {}
 
   render() {
     return (
-      <View style={styles.container}>
-        <Toolbar
-          icon="map"
-          style={styles.toolbar}
-          onPress={this.handleMenuPress}
-        >
-          <ToolbarAction
-            icon="menu"
-            color={styles.yellow}
-            onPress={this.handleMenuPress}
-            style={styles.icon}
-          />
+      <ScrollView style={styles.container}>
+        <Icon
+          name="close"
+          containerStyle={styles.icon}
+        />
 
-          <ToolbarContent
-            title="Medusa"
-            titleStyle={styles.title}
-            color="#000"
-          />
+        <Text style={styles.title}>Qual sua rota?</Text>
 
-          <ToolbarAction
-            color={styles.yellow}
-            icon="notifications"
-            onPress={this.handleNotificationPress}
-            style={styles.icon}
-          />
-        </Toolbar>
-      </View>
+        <TextInput
+          style={styles.input}
+          label="Ex: Rua do Apolo, 235"
+        />
+
+        <Text style={styles.description}>Sugestões</Text>
+
+        <SuggestionCard
+          label="Passei ciclistico não sei das quantas"
+          description="25km (30min)"
+          backgroundColor="#FF39D6"
+        />
+
+        <SuggestionCard
+          label="Passei ciclistico não sei das quantas"
+          description="25km (30min)"
+          backgroundColor="#FF39D6"
+        />
+
+        <SuggestionCard
+          label="Passei ciclistico não sei das quantas"
+          description="25km (30min)"
+          backgroundColor="#FF39D6"
+        />
+
+        <View style={{ height: 30 }} />
+      </ScrollView>
     );
   }
 }
 
-const mapStateToProps = ({ authorization }) => ({ authorizations: authorization.authorizations });
-
-const mapDispatchToProps = { getAuthorizations: AuthorizationActions.getAuthorizations };
-
-export default connect(mapStateToProps, mapDispatchToProps)(Main);
+export default Main;

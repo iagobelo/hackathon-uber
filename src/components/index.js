@@ -1,11 +1,9 @@
-import Drawer from './Drawer';
-import DrawerItem from './DrawerItem';
-import AuthorizationTable from './AuthorizationTable';
 import Load from './Load';
+import SlideCard from './SlideCard';
+import SuggestionCard from './SuggestionCard';
 
 export {
-  Drawer,
-  DrawerItem,
-  AuthorizationTable,
   Load,
+  SlideCard,
+  SuggestionCard,
 };
