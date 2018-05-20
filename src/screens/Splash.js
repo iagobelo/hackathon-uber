@@ -1,32 +1,19 @@
 import React from 'react';
-import { View, StyleSheet } from 'react-native';
-import Swiper from 'react-native-swiper';
+import { View, Text, StyleSheet } from 'react-native';
+import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
 
-import { SlideCard } from '../components';
-import slide01 from '../assets/images/01.png';
-import slide02 from '../assets/images/02.png';
-import slide03 from '../assets/images/03.png';
+import * as AuthActions from '../actions/AuthActions';
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
     alignItems: 'center',
     justifyContent: 'center',
-    backgroundColor: '#f0f0f0',
-    paddingTop: 40,
+    backgroundColor: '#fff',
   },
   logo: {
     width: '100%',
-  },
-  swiperWrapper: {
-    flex: 1,
-  },
-  title: {
-    fontSize: 30,
-    alignSelf: 'center',
-  },
-  slide: {
-    flex: 1,
   },
 });
 
@@ -36,25 +23,24 @@ class Splash extends React.Component {
   }
 
   static propTypes = {
+    checkSession: PropTypes.func.isRequired,
+    navigation: PropTypes.objectOf(PropTypes.any).isRequired,
+  }
+
+  componentDidMount() {
+    const { checkSession, navigation } = this.props;
+    checkSession(navigation);
   }
 
   render() {
     return (
       <View style={styles.container}>
-        <Swiper style={styles.wrapper} activeDotColor="#04166A">
-          <View style={styles.slide}>
-            <SlideCard imageSource={slide01} subtitle="Aproveite o melhor de suas viagens sem se preocupar com trânsitos" />
-          </View>
-          <View style={styles.slide}>
-            <SlideCard imageSource={slide02} subtitle="Viva experiências mais intensas com culturas culturas locais" />
-          </View>
-          <View style={styles.slide}>
-            <SlideCard imageSource={slide03} subtitle="Receba uma rota turística baseada no seu destino" />
-          </View>
-        </Swiper>
+        <Text>Splash</Text>
       </View>
     );
   }
 }
 
-export default Splash;
+const mapDispatchToProps = { checkSession: AuthActions.checkSession };
+
+export default connect(null, mapDispatchToProps)(Splash);

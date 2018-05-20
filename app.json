@@ -1,8 +1,10 @@
 {
   "expo": {
     "sdkVersion": "25.0.0",
+    "icon": "./src/assets/images/app_icon.png",
     "privacy": "public",
     "notification": {
+      "icon": "./src/assets/images/app_icon.png"
     },
     "android": {},
     "ios": {}
