@@ -4,6 +4,7 @@ import {
   Splash,
   SignUp,
   Main,
+  Map,
 } from '../screens';
 import { Drawer } from '../components';
 
@@ -21,7 +22,7 @@ const routes = StackNavigator({
   SignUp: { screen: SignUp },
   UserMain: {
     screen: DrawerNavigator({
-      UserMain: { screen: Main },
+      UserMain: { screen: Map },
     }, drawerSettings),
   },
 }, rootSettings);
